@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp page - Page de création d'un utilisateur</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>SignUp page - Page de création d'un utilisateur</h1>
+        <form id="signupForm">
+
+            <!-- Les 3 champs sont obligatoires -->
+
+            <label for="email" class="label">Email</label>
+            <input type="email" name="email" class="input-field" required/> 
+
+            <label for="pseudo" class="label">Pseudo</label>
+            <input type="text" name="pseudo" class="input-field" required/> 
+
+            <label for="password" class="label">Password</label>
+            <input type="password" name="password" class="input-field" required/> 
+
+            <button type="button" class="button" onclick="signup()">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        const signup = async () => {
+            const email = document.querySelector('input[name="email"]').value;
+            const pseudo = document.querySelector('input[name="pseudo"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+    
+            try {
+                const response = await fetch('http://localhost:3000/auth/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        pseudo,
+                        password
+                    })
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    const { token } = data;
+    
+                    // Stocker le token dans localStorage
+                    localStorage.setItem('token', token);
+    
+                    alert('Utilisateur créé ! Aller au Login');
+                    window.location.href = 'login.html'; // Rediriger vers la page Login
+                } else {
+                    const data = await response.json();
+                    alert('Erreur de création : ' + data.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Erreur');
+            }
+        };
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,290 @@
+/* Choix de 2 images pour le fond d'écran, image des maisons Harry Potter, trouvée sur internet */
+/* et une 2ème image alternative pour montrer la variabilité du CSS */
+:root {
+  --background-default: url('Background/Maisons-Harry-Potter.webp');
+  --background-alternative: url('Background/Choix 2.jpg');
+}
+
+/* style de base pour l'arrière plan et le texte */
+body {
+  background-image: var(--background-default); /* on commence avec l'image par défaut */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: 16px;
+}
+
+  /* styles des cartes */
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 0 0 auto;
+    transition: background-color 0.5s ease;
+  }
+  
+  /* effet de survol ci-dessous. le fond de la carte devient rouge foncé quand la souris survole */
+  .card:hover {
+    background-color: darkred;
+}
+
+  /* définit la taille de la police dans les paragraphes à l'intérieur des cartes, identique à celle définie pour la carte */
+  .card p {
+    font-size: 1em;
+  }
+
+  /* définit que les images à l'intérieur des cartes restent bien à l'intérieur sans déborder, et qu'elles aient des bords arrondis */
+  .card img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  /* règles pour le conteneur des cartes, qui utilisent Flexbox, pour bien s'aligner à l'intérieur du conteneur */
+  #characters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* ci-dessous styles pour l'intérieur des cartes, les en-têtes des cartes  */
+    .card h2 {
+    margin-bottom: 5px;
+    font-size: 1.5em; /* taille des caractères ajustables */
+  }
+  
+  
+  /* styles pour la burger box */
+  .burger-menu {
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+  }
+  
+  /* Je choisis une couleur visible pour les 3 petites barres horizontales de la burger box */
+  .bar {
+    width: 25px;
+    height: 5px;
+    background-color: darkred;
+    margin: 5px 0;
+  }
+
+  /* Styles pour la sidenav */
+  .menu-item {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+  }
+  
+  .menu-item:hover {
+    color: orangered;
+  }
+  
+  /* Styles pour l'affichage de la carte détaillée, notamment l'effet pulse */
+    .card-detail {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px auto;
+    width: 20%;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 0 0 auto;
+    animation: pulse 3s infinite;
+  }
+
+  /* Styles pour l'affichage de l'image à l'intérieur de la carte, qui s'ajuste dans la carte */
+  .card-detail img {
+    max-width: 89%; 
+    height: auto;
+  }
+
+  /* Styles pour les éléments de 2ème niveau de la carte */
+  .card-detail h2 {
+      margin-bottom: 10px;
+      text-align: center;
+      width: 100%;
+  }
+
+  /* Keyframes pour l'animation qui permet au titre Cartes Harry Potter de bouger à l'horizontal */
+  @keyframes animation-du-titre {
+    0% {
+      transform: scale(1);
+      color: black;
+    }
+    25% {
+      transform: scale(1.1);
+      color: blue;
+    }
+    50% {
+      transform: scale(1);
+      color: green; 
+    }
+    75% {
+      transform: scale(1.1);
+      color: rgba(116, 98, 5, 0.925); 
+    }
+    100% {
+      transform: scale(1);
+      color: red;
+    }
+  }
+
+
+  /* Styles pour le titre Cartes Harry Potter */
+  .element {
+    animation: animation-du-titre 20s ease-in-out infinite;
+  }
+
+  /* Keyframes pour l'animation pulse, qui sert à la carte détaillée */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      background-color: black;
+    }
+    50% {
+      transform: scale(1.05);
+      background-color: darkred;
+    }
+    100% {
+      transform: scale(1);
+      background-color: black;
+    }
+  }
+
+  /* Styles pour aligner horizontalement les noms des maisons */
+  .houses {
+    display: flex;
+  }
+
+  /* Styles pour ajouter un espacement entre les noms des maisons */
+  .house {
+    margin-right: 20px;
+  }
+
+  /* Style les noms de maisons, qui servent à filtrer en haut de la page HTML */
+  .house {
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+
+  /* Au passage de la souris sur le nom d'une maison, sa taille augmente de 20% */
+  .house:hover {
+    transform: scale(1.2);
+  }
+
+  /* Styles pour les couleurs de chacune des 4 maisons */
+  .house.gryffindor {
+    color: red;
+  }
+
+  .house.slytherin {
+    color: green;
+  }
+
+  .house.ravenclaw {
+    color: darkblue;
+  }
+
+  .house.hufflepuff {
+    color: rgba(116, 98, 5, 0.925);
+  }
+
+  /* Styles pour la sidenav */
+    .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  /* Styles pour la burger box */
+  .burger-menu {
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+  }
+
+  /* Styles pour les barres horinzontales qui construisent la burger box */
+  .bar {
+    width: 25px;
+    height: 5px;
+    background-color: #111;
+    margin: 6px 0;
+  }
+
+  /* Bouton flottant rouge en bas à droite de l'écran */
+  .floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 3;
+    background-color: darkred;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 60px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  /* Change la couleur du bouton flottant lorsque la souris le survole */
+  .floating-btn:hover {
+    background-color: red;
+  }

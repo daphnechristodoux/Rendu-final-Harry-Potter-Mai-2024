@@ -1,0 +1,8 @@
+Voici le lien GitHub pour ce rendu : https://github.com/daphnechristodoux/daphne_christodoux_rendu_NodeJS.git
+
+Les 3 méthodes demandées (signup, login et profil) sont dans le même fichier back : Auth-User-Controller.mjs
+
+Les 3 fichiers front (html) sont livrés (signup, login et profil)
+Ces 3 partagent un css (styles.css)
+
+Une extraction de la table user est dans user.sql

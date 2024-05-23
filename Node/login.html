@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <!-- Utilisation du CSS commun -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container login-form">
+        <form method="POST" id="formulaire">
+            <h2 class="title">Connexion</h2>
+            <div class="form-group input-group">
+                <label class="label" for="username">Nom d'utilisateur</label>
+                <input class="input-field" type="text" id="email" name="username" required />
+            </div>
+            <div class="form-group input-group">
+                <label class="label" for="password">Mot de passe</label>
+                <input class="input-field" type="password" id="password" name="password" required />
+            </div>
+            <!-- Utilisation de la classe .button pour le bouton, pareil pour les 3 front -->
+            <button class="button" type="submit">Se connecter</button>
+        </form>
+    </div>
+
+    <script>
+        const login = async () => {
+            const email = document.querySelector('input[name="username"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+    
+            try {
+                const response = await fetch('http://localhost:3000/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    const { token } = data;
+    
+                    // Stocker le token dans localStorage
+                    localStorage.setItem('token', token);
+    
+                    alert('Login réussi, allez vers votre profil');
+                    // Rediriger vers profil
+                    window.location.href = 'profil.html';
+                } else {
+                    const data = await response.json();
+                    alert('Erreur de login : ' + data.error);
+                }
+            } catch (error) {
+                console.error('Erreur', error);
+                alert('Erreur');
+            }
+        };
+    
+        document.getElementById('formulaire').addEventListener('submit', (event) => {
+            event.preventDefault();
+            login();
+        });
+    </script>
+</body>
+</html>
